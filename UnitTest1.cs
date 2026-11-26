@@ -8,22 +8,16 @@ namespace UnitTestProject1
     [TestClass]
     public class UnitTest1
     {
-        // Допоміжні методи -------------------------------------------------
-
-        // Створює вектор зі щільного списку координат: V(0, 5, 0) -> (0; 5; 0).
         private static Vector V(params double[] values)
         {
             return new Vector(values);
         }
 
-        // Перевіряє операцію true/false через звичайний if.
         private static bool AsBool(Vector v)
         {
             if (v) return true;
             return false;
         }
-
-        // Конструктори -----------------------------------------------------
 
         [TestMethod]
         public void DefaultConstructor_CreatesZeroVectorOfDimensionOne()
@@ -81,8 +75,6 @@ namespace UnitTestProject1
             Assert.AreEqual(100.0, copy[1]);
         }
 
-        // Виведення --------------------------------------------------------
-
         [TestMethod]
         public void ToString_PrintsZeroCoordinatesToo()
         {
@@ -115,8 +107,6 @@ namespace UnitTestProject1
             }
         }
 
-        // Індексатор -------------------------------------------------------
-
         [TestMethod]
         public void Indexer_Get_ReturnsStoredValueOrZero()
         {
@@ -136,7 +126,7 @@ namespace UnitTestProject1
             v[4] = 7;
             v[1] = 5;
             v[2] = 3;
-            v[4] = 9;   // зміна існуючого елемента
+            v[4] = 9;   
 
             Assert.AreEqual(3, v.NonZeroCount);
             Assert.AreEqual("(0; 5; 3; 0; 9; 0)", v.ToString());
@@ -148,7 +138,7 @@ namespace UnitTestProject1
             Vector v = V(0, 5, 0, 0, 7, 0);
 
             v[1] = 0;
-            v[0] = 0;   // елемента й так немає, нічого не повинно статися
+            v[0] = 0;   
 
             Assert.AreEqual(1, v.NonZeroCount);
             Assert.AreEqual("(0; 0; 0; 0; 7; 0)", v.ToString());
@@ -164,7 +154,6 @@ namespace UnitTestProject1
             Assert.ThrowsException<IndexOutOfRangeException>(() => { v[10] = 1; });
         }
 
-        // Арифметичні операції ---------------------------------------------
 
         [TestMethod]
         public void Addition_ReturnsSumOfVectors()
@@ -232,9 +221,9 @@ namespace UnitTestProject1
             Vector a = V(0, 5, 0, 0, 7, 0);
             Vector b = V(1, 0, 0, 0, 2, 0);
 
-            Assert.AreEqual(14.0, a * b, 1e-9);        // збігається лише індекс 4: 7 * 2
-            Assert.AreEqual(74.0, a * a, 1e-9);        // 25 + 49
-            Assert.AreEqual(0.0, a * V(1, 0, 2, 3, 0, 4), 1e-9);   // спільних індексів немає
+            Assert.AreEqual(14.0, a * b, 1e-9);        
+            Assert.AreEqual(74.0, a * a, 1e-9);        
+            Assert.AreEqual(0.0, a * V(1, 0, 2, 3, 0, 4), 1e-9);   
         }
 
         [TestMethod]
@@ -245,8 +234,6 @@ namespace UnitTestProject1
             Assert.AreEqual(V(0, -5, 0, 0, -7, 0), -a);
         }
 
-        // Операції true / false --------------------------------------------
-
         [TestMethod]
         public void TrueFalse_NonZeroVectorIsTrue_ZeroVectorIsFalse()
         {
@@ -254,8 +241,6 @@ namespace UnitTestProject1
             Assert.IsFalse(AsBool(new Vector(3)));
             Assert.IsFalse(AsBool(null));
         }
-
-        // Приведення типів -------------------------------------------------
 
         [TestMethod]
         public void ImplicitConversion_ArrayToVector()
@@ -283,8 +268,6 @@ namespace UnitTestProject1
             Assert.AreEqual(5.0, V(3, 4).Norm, 1e-9);
         }
 
-        // Порівняння -------------------------------------------------------
-
         [TestMethod]
         public void EqualityOperators_CompareDimensionAndCoordinates()
         {
@@ -292,9 +275,9 @@ namespace UnitTestProject1
 
             Assert.IsTrue(a == V(0, 5, 0, 0, 7, 0));
             Assert.IsFalse(a != V(0, 5, 0, 0, 7, 0));
-            Assert.IsTrue(a != V(0, 5, 0, 0, 8, 0));        // інше значення
-            Assert.IsTrue(V(1, 0) != V(1, 0, 0));           // інша розмірність
-            Assert.IsTrue(V(0, 0, 0) == new Vector(3));     // нульові вектори
+            Assert.IsTrue(a != V(0, 5, 0, 0, 8, 0));        
+            Assert.IsTrue(V(1, 0) != V(1, 0, 0));           
+            Assert.IsTrue(V(0, 0, 0) == new Vector(3));     
         }
 
         [TestMethod]
