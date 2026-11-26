@@ -3,7 +3,7 @@ using System.Text;
 
 namespace VectorLibrary
 {
-    public class Vector : IVector
+    public class Vector : IVector, IEquatable<Vector>
     {
         private const double Epsilon = 1e-9;
         private Node head;
